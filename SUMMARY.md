@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [UI部分](ui/README.md)
+   * [UIView](ui/uiview.md)
    * [view的封装](ui/view.md)
    * [ios九宫格](ui/ios.md)
    * [uiscrollview](ui/uiscrollview.md)
@@ -17,6 +18,7 @@
        * [UITableView 数据封装](uitableview_data.md)
    * [UI键盘处理](ui.md)
    * [textFiled](ui/textfiled.md)
+   * [UI对话框](dialog.md)
 * [OC 语法](oc/README.md)
 * [IOS 编程](ios/README.md)
    * [定时器](ios/time.md)
