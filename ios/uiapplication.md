@@ -33,4 +33,12 @@ applicationIconBadgeNumber
     // 注册用户的通知
     [app registerUserNotificationSettings:settings];
 ```
+
 ![](../images/uiapplocation.png)
+
+```objc
+// 设置联网状态
+app.networkActivityIndicatorVisible = YES;
+```
+
+
