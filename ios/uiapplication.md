@@ -32,6 +32,6 @@ applicationIconBadgeNumber
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
     // 注册用户的通知
     [app registerUserNotificationSettings:settings];
-    
 ```
+</br>
 ![](../images/uiapplocation.png)
