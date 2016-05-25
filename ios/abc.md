@@ -25,15 +25,24 @@
 - KVO的使用步骤<br>
 
 ```objc
-// cc监听了aa的name属性的改变
-[aa addObserver:cc forKeyPath:@"name" options: NSKeyValueObservingOptionOld context:nil];
+    self.deall = [[XMGDeal alloc] init];
+    self.deall.price = @"110";
+    self.deall.title = @"新增加的";
+    self.deall.buyCount = @"22";
 
-// cc得实现监听方法
-/**
- * 当监听到object的keyPath属性发生了改变
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    NSLog(@"监听到%@对象的%@属性发生了改变， %@", object, keyPath, change);
+//添加监听
+[self.deall addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:@"大家好，我是context"];
+
+    //监听了的title属性的改变
+self.deall.title = @"晓勇哥带我拿首胜";
 }
+
+//当监听到object的keyPath属性发生了改变
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    NSString *str = [NSString stringWithFormat:@"keyPath---->%@,object--->%@,change--->%@",keyPath,object,change[@"new"]];
+    NSLog(@"%@",str);
+}
+
+//log [3175:269829] keyPath---->title,object---><XMGDeal: 0x7fe2185376f0>,change--->晓勇哥带我拿首胜
 ```
