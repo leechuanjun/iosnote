@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>UIPickView | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../ui/uidatepciker.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../ui/app_icon.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="1.13" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -388,7 +388,7 @@
         </li>
     
         
-        <li class="chapter " data-level="1.13" data-path="ui/uipickview.html">
+        <li class="chapter active" data-level="1.13" data-path="ui/uipickview.html">
             
                 
                     <a href="../ui/uipickview.html">
@@ -739,12 +739,81 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_25">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="uipickview">UIPickView</h1>
+<ul>
+<li><p>1.UIPickView什么时候用?
+通常在注册模块,当用户需要选择一些东西的时候,比如说城市,往往弹出一个PickerView给他们选择。</p>
+</li>
+<li><p>2.UIPickView常见用法,演示实例程序</p>
+<ul>
+<li>1、独立的,没有任何关系 =&gt;菜单系统。</li>
+<li>2、 相关联的,下一列和第一列有联系=&gt;省会城市选择</li>
+<li>3、图文并帽,=&gt;国旗选择。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>3.UIDatePicker什么时候用? 当用户选择日期的时候,一般弹出一个UIDatePicker给用户选择。</li>
+</ul>
+<h3 id="1">1.搭建界面</h3>
+<p><strong>1、 注意点:PickerView的高度不能改,默认162,PickerView里面每行的高度 可以改,不要弄混淆了。</strong></p>
+<h3 id="2pickerview">2.pickerView显示数据</h3>
+<ul>
+<li><p>1、如何使用PickerView展示数据? 进入PickerView头文件,有数据源和代理,联想到UITableView,模仿 UITableView的用法。</p>
+</li>
+<li><p>2、让控制器作为PickerView的数据源,控制器遵守PickerView的数据源方法</p>
+<ul>
+<li>2.1&gt;两种方式:1.拖线 2.代码</li>
+<li>2.2&gt;系统自带的控件,数据源和代理属性不需要IBOutlet,也能拖 线。自己的属性,想要拖线,必须写IBOutlet。</li>
+</ul>
+</li>
+<li><p>3、 PickerView的数据源方法</p>
+<ul>
+<li>1、 numberOfComponentsInPickerView: 返回多少列</li>
+<li>2、 pickerView:numberOfRowsInComponent: 返回第component列有多少 行</li>
+<li>3、和UITableView的区别,每一行长什么样,是由PickerView的代理决 定的。</li>
+<li>4、注意:如果没有返回每一行长什么样子,每行就会显示?,看见?,就 知道没有实现每一行长什么样子的方法。</li>
+</ul>
+</li>
+<li><p>4、 PickerView的代理方法</p>
+</li>
+</ul>
+<pre><code class="lang-objc">
+<span class="hljs-comment">//返回第component列第row行长什么样。</span>
+<span class="hljs-comment">//第component列第row行的展示标题</span>
+- (<span class="hljs-built_in">NSString</span> *)pickerView:(UIPickerView *)pickerView titleForRow:(<span class="hljs-built_in">NSInteger</span>)row forComponent:(<span class="hljs-built_in">NSInteger</span>)component
+
+<span class="hljs-comment">// 第component列第row行带属性的标题</span>
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(<span class="hljs-built_in">NSInteger</span>)row forComponent:(<span class="hljs-built_in">NSInteger</span>) component
+
+<span class="hljs-comment">//第component列第row行展示的视图</span>
+- (<span class="hljs-built_in">UIView</span> *)pickerView:(UIPickerView *)pickerView viewForRow:(<span class="hljs-built_in">NSInteger</span>)row forComponent:(<span class="hljs-built_in">NSInteger</span>)component reusingView:(<span class="hljs-built_in">UIView</span> *)view;
+
+<span class="hljs-comment">//返回第component列每一行的高度和宽度</span>
+- (<span class="hljs-built_in">CGFloat</span>)pickerView:(UIPickerView *)pickerView widthForComponent:(<span class="hljs-built_in">NSInteger</span>)component;
+- (<span class="hljs-built_in">CGFloat</span>)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(<span class="hljs-built_in">NSInteger</span>)component;
+
+<span class="hljs-comment">//选中第component列第row行调用</span>
+- (<span class="hljs-keyword">void</span>)pickerView:(UIPickerView *)pickerView didSelectRow:(<span class="hljs-built_in">NSInteger</span>)row inComponent:(<span class="hljs-built_in">NSInteger</span>)component;
+</code></pre>
+<ul>
+<li>5.随机选中某一列的某一行<ul>
+<li>1、 如何选中某一行 [self.pickerView selectRow:row inComponent:component
+animated:YES];</br></br></li>
+<li>2、 先随机选中第0列的某一行,随机数取值范围看第0列总共有多少行,
+arc4random_uniform(x)随机0~x-1的数</br></br></li>
+<li>3、 避免随机出来的行数都一样,需要判断下,随机出来的行数和当前选中 的是否一样,一样就重新随机,用while判断,直到随机到不一样,才行。<ul>
+<li>问题:label没有显示最新选中的一行。
+原因:手动调用pickview滚动,选中某一行,不会触发代理,我们自己 主动调用代理,让lebel显示选中哪一行.
+注意:只有用户手动滚动才可以触发pickview的代理方法。</li>
+</ul>
+</li>
+<li>4、 每一列都要随机选中,弄个for循序,遍历每一列都随机选中</li>
+</ul>
+</li>
+</ul>
 
                     
                     </section>
@@ -755,10 +824,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../ui/app_icon.html" class="navigation navigation-prev " aria-label="Previous page: app icon 和启动图片"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../ui/uidatepciker.html" class="navigation navigation-next " aria-label="Next page: UIDatePciker"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

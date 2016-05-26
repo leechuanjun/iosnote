@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>UIDatePciker | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../oc/README.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../ui/uipickview.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="1.13.1" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -405,7 +405,7 @@
                 
     
         
-        <li class="chapter " data-level="1.13.1" data-path="ui/uidatepciker.html">
+        <li class="chapter active" data-level="1.13.1" data-path="ui/uidatepciker.html">
             
                 
                     <a href="../ui/uidatepciker.html">
@@ -739,12 +739,55 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_24">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="uidatepciker">UIDatePciker</h1>
+<h4 id="textfield-">利用textField 来实现弹出日期选择</h4>
+<p>1、点击输入框的时候，不可以输入内容</p>
+<p><strong>注意：不能使用enable = NO,因为这样就不能输入内容和监听利用textField的点击</strong></p>
+<pre><code class="lang-objc"><span class="hljs-comment">// 是否允许用户输入文字</span>
+- (<span class="hljs-built_in">BOOL</span>)textField:(UITextField *)textField shouldChangeCharactersInRange:(<span class="hljs-built_in">NSRange</span>)range replacementString:(<span class="hljs-built_in">NSString</span> *)string{
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">NO</span>;
+}
+</code></pre>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">void</span>)viewDidLoad {
+    [<span class="hljs-keyword">super</span> viewDidLoad];
+    <span class="hljs-comment">//开始的初始化</span>
+    [<span class="hljs-keyword">self</span> setupBrithTextField];
+}
+</code></pre>
+<p>2、 新建UIDatePicker控件，然后把TextField.inputView设置为datePicker</p>
+<pre><code class="lang-objc">
+- (<span class="hljs-keyword">void</span>)setupBrithTextField
+{
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.datePicker</span> = datePicker;
+
+    <span class="hljs-comment">//设置地域语言</span>
+    datePicker<span class="hljs-variable">.locale</span> = [NSLocale localeWithLocaleIdentifier:<span class="hljs-string">@"zh"</span>];
+
+    <span class="hljs-comment">//设置显示时间格式</span>
+    datePicker<span class="hljs-variable">.datePickerMode</span> = UIDatePickerModeDate;
+
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.birthTextField</span><span class="hljs-variable">.inputView</span> = datePicker;
+
+    [datePicker addTarget:<span class="hljs-keyword">self</span> action:<span class="hljs-keyword">@selector</span>(changeDateToString:) forControlEvents:UIControlEventValueChanged];
+
+}
+
+- (<span class="hljs-keyword">void</span>)changeDateToString:(UIDatePicker *)datePicker
+{
+    <span class="hljs-built_in">NSDate</span> *date = datePicker<span class="hljs-variable">.date</span>;
+
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+
+     <span class="hljs-comment">//设置输出时间格式</span>
+    format<span class="hljs-variable">.dateFormat</span> = <span class="hljs-string">@"yyyy-MM-dd"</span>;
+
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.birthTextField</span><span class="hljs-variable">.text</span> = [format stringFromDate:date];
+}
+</code></pre>
 
                     
                     </section>
@@ -755,10 +798,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../ui/uipickview.html" class="navigation navigation-prev " aria-label="Previous page: UIPickView"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../oc/README.html" class="navigation navigation-next " aria-label="Next page: OC 语法"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

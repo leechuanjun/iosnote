@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>KVC\KVO\代理 | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../ios/sada.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="3.5" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -528,7 +528,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.5" data-path="ios/abc.html">
+        <li class="chapter active" data-level="3.5" data-path="ios/abc.html">
             
                 
                     <a href="../ios/abc.html">
@@ -739,12 +739,65 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_3">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="">代理模式</h1>
+<h2 id="">代理</h2>
+<ul>
+<li><p>代理设计模式的作用:</p>
+<ul>
+<li>1.A对象监听B对象的一些行为，A成为B的代理</li>
+<li>2.B对象想告诉A对象一些事情，A成为B的代理</li>
+</ul>
+</li>
+<li><p>代理设计模式的总结：</p>
+<ul>
+<li>如果你想监听别人的一些行为，那么你就要成为别人的代理</li>
+<li>如果你想告诉别人一些事情，那么就让别人成为你的代理</li>
+</ul>
+</li>
+<li><p>代理设计模式的开发步骤</p>
+<ul>
+<li>1.拟一份协议（协议名字的格式：控件名 + Delegate），在协议里面声明一些代理方法（一般代理方法都是@optional）</li>
+<li>2.声明一个代理属性：@property (nonatomic, weak) id&lt;代理协议&gt; delegate;</li>
+<li>3.在内部发生某些行为时，调用代理对应的代理方法，通知代理内部发生什么事</li>
+<li>4.设置代理：xxx.delegate = yyy;</li>
+<li>5.yyy对象遵守协议，实现代理方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="">代理和通知的区别</h2>
+<ul>
+<li>代理：1个对象只能告诉另1个对象发生了什么事</li>
+<li>通知：1个对象可以告诉N个对象发生了什么事</li>
+</ul>
+<h2 id="kvckvo">KVC\KVO</h2>
+<ul>
+<li>KVC(Key Value Coding)常见作用：给模型属性赋值</li>
+<li>KVO(Key Value Observing)常用作用：监听模型属性值的改变</li>
+<li>KVO的使用步骤<br></li>
+</ul>
+<pre><code class="lang-objc">    <span class="hljs-keyword">self</span><span class="hljs-variable">.deall</span> = [[XMGDeal alloc] init];
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.deall</span><span class="hljs-variable">.price</span> = <span class="hljs-string">@"110"</span>;
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.deall</span><span class="hljs-variable">.title</span> = <span class="hljs-string">@"新增加的"</span>;
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.deall</span><span class="hljs-variable">.buyCount</span> = <span class="hljs-string">@"22"</span>;
+
+<span class="hljs-comment">//添加监听</span>
+[<span class="hljs-keyword">self</span><span class="hljs-variable">.deall</span> addObserver:<span class="hljs-keyword">self</span> forKeyPath:<span class="hljs-string">@"title"</span> options:NSKeyValueObservingOptionNew context:<span class="hljs-string">@"大家好，我是context"</span>];
+
+    <span class="hljs-comment">//监听了的title属性的改变</span>
+<span class="hljs-keyword">self</span><span class="hljs-variable">.deall</span><span class="hljs-variable">.title</span> = <span class="hljs-string">@"晓勇哥带我拿首胜"</span>;
+}
+
+<span class="hljs-comment">//当监听到object的keyPath属性发生了改变</span>
+- (<span class="hljs-keyword">void</span>)observeValueForKeyPath:(<span class="hljs-built_in">NSString</span> *)keyPath ofObject:(<span class="hljs-keyword">id</span>)object change:(<span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *,<span class="hljs-keyword">id</span>&gt; *)change context:(<span class="hljs-keyword">void</span> *)context
+{
+    <span class="hljs-built_in">NSString</span> *str = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"keyPath----&gt;%@,object---&gt;%@,change---&gt;%@"</span>,keyPath,object,change[<span class="hljs-string">@"new"</span>]];
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"%@"</span>,str);
+}
+
+<span class="hljs-comment">//log [3175:269829] keyPath----&gt;title,object---&gt;&lt;XMGDeal: 0x7fe2185376f0&gt;,change---&gt;晓勇哥带我拿首胜</span>
+</code></pre>
 
                     
                     </section>
@@ -755,10 +808,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../.html" class="navigation navigation-prev " aria-label="Previous page: 代理模式"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../ios/sada.html" class="navigation navigation-next " aria-label="Next page: 图片拉伸"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

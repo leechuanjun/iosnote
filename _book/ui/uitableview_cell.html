@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>UITableView 不等高cell | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../uitableview_data.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../ui/uitableview_setting.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="1.8.3" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -287,7 +287,7 @@
         </li>
     
         
-        <li class="chapter " data-level="1.8.3" data-path="ui/uitableview_cell.html">
+        <li class="chapter active" data-level="1.8.3" data-path="ui/uitableview_cell.html">
             
                 
                     <a href="../ui/uitableview_cell.html">
@@ -739,12 +739,82 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_28">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="uitableview-cell">UITableView 不等高cell</h1>
+<ul>
+<li><h4 id="celltableview-heightforrowatindexpath--cellforrowatindexpath--estimatedheightforrowatindexpath-cellforrowatindexpath--heightforrowatindexpath-setcellmoduleheightforrowatindexpath-"><strong>不等高的关键在于算出每个cell的高度，tableView 执行方法的顺序是先执行heightForRowAtIndexPath ，然后在执行 cellForRowAtIndexPath ，但是实现了方法 estimatedHeightForRowAtIndexPath（预计高度方法)之后 ，顺序会变成先执行cellForRowAtIndexPath 然后再执行 heightForRowAtIndexPath ，然后我们只要在set方法中算好每个cell的高度，然后保存在module里面，在heightForRowAtIndexPath 方法中返回高度就行了</strong></h4>
+</li>
+</ul>
+<pre><code class="lang-objc">- (<span class="hljs-built_in">UITableViewCell</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath
+{
+    XMGStatusCell *cell = [XMGStatusCell cellWithTableView:tableView];
+    cell<span class="hljs-variable">.status</span> = <span class="hljs-keyword">self</span><span class="hljs-variable">.statuses</span>[indexPath<span class="hljs-variable">.row</span>];
+    <span class="hljs-keyword">return</span> cell;
+}
+
+<span class="hljs-preprocessor">#pragma mark - 代理方法</span>
+<span class="hljs-comment">/**
+ *  返回每一行的高度
+ */</span>
+- (<span class="hljs-built_in">CGFloat</span>)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath
+{
+    XMGStatus *staus = <span class="hljs-keyword">self</span><span class="hljs-variable">.statuses</span>[indexPath<span class="hljs-variable">.row</span>];
+    <span class="hljs-keyword">return</span> staus<span class="hljs-variable">.cellHeight</span>;
+}
+
+<span class="hljs-comment">/**
+ * 返回每一行的估计高度
+ * 只要返回了估计高度，那么就会先调用tableView:cellForRowAtIndexPath:方法创建cell，再调用tableView:heightForRowAtIndexPath:方法获取cell的真实高度
+ */</span>
+- (<span class="hljs-built_in">CGFloat</span>)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView estimatedHeightForRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath
+{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">200</span>;
+}
+</code></pre>
+<pre><code class="lang-objc">
+- (<span class="hljs-keyword">void</span>)awakeFromNib
+{
+    <span class="hljs-comment">// 设置label每一行文字的最大宽度</span>
+   <span class="hljs-comment">// 为了保证计算出来的数值 跟 真正显示出来的效果 一致</span>
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.contentLabel</span><span class="hljs-variable">.preferredMaxLayoutWidth</span> = [UIScreen mainScreen]<span class="hljs-variable">.bounds</span><span class="hljs-variable">.size</span><span class="hljs-variable">.width</span> - <span class="hljs-number">20</span>;
+}
+
+
+
+- (<span class="hljs-keyword">void</span>)setStatus:(XMGStatus *)status
+{
+    _status = status;
+
+    <span class="hljs-keyword">if</span> (status<span class="hljs-variable">.isVip</span>) {
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.nameLabel</span><span class="hljs-variable">.textColor</span> = [<span class="hljs-built_in">UIColor</span> orangeColor];
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.vipView</span><span class="hljs-variable">.hidden</span> = <span class="hljs-literal">NO</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.nameLabel</span><span class="hljs-variable">.textColor</span> = [<span class="hljs-built_in">UIColor</span> blackColor];
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.vipView</span><span class="hljs-variable">.hidden</span> = <span class="hljs-literal">YES</span>;
+    }
+
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.nameLabel</span><span class="hljs-variable">.text</span> = status<span class="hljs-variable">.name</span>;
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.iconView</span><span class="hljs-variable">.image</span> = [<span class="hljs-built_in">UIImage</span> imageNamed:status<span class="hljs-variable">.icon</span>];
+    <span class="hljs-keyword">if</span> (status<span class="hljs-variable">.picture</span>) {
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.pictureView</span><span class="hljs-variable">.hidden</span> = <span class="hljs-literal">NO</span>;
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.pictureView</span><span class="hljs-variable">.image</span> = [<span class="hljs-built_in">UIImage</span> imageNamed:status<span class="hljs-variable">.picture</span>];
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.pictureView</span><span class="hljs-variable">.hidden</span> = <span class="hljs-literal">YES</span>;
+    }
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.contentLabel</span><span class="hljs-variable">.text</span> = status<span class="hljs-variable">.text</span>;
+
+    <span class="hljs-comment">// 强制布局</span>
+    [<span class="hljs-keyword">self</span> layoutIfNeeded];
+
+    <span class="hljs-comment">// 计算cell的高度</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">self</span><span class="hljs-variable">.pictureView</span><span class="hljs-variable">.hidden</span>) { <span class="hljs-comment">// 没有配图</span>
+        status<span class="hljs-variable">.cellHeight</span> = CGRectGetMaxY(<span class="hljs-keyword">self</span><span class="hljs-variable">.contentLabel</span><span class="hljs-variable">.frame</span>) + <span class="hljs-number">10</span>;
+    } <span class="hljs-keyword">else</span> { <span class="hljs-comment">// 有配图</span>
+        status<span class="hljs-variable">.cellHeight</span> = CGRectGetMaxY(<span class="hljs-keyword">self</span><span class="hljs-variable">.pictureView</span><span class="hljs-variable">.frame</span>) + <span class="hljs-number">10</span>;
+    }
+}
+</code></pre>
 
                     
                     </section>
@@ -755,10 +825,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../ui/uitableview_setting.html" class="navigation navigation-prev " aria-label="Previous page: UITableView 基本设置"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../uitableview_data.html" class="navigation navigation-next " aria-label="Next page: UITableView 数据封装"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

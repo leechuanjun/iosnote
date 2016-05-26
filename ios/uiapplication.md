@@ -33,11 +33,8 @@ applicationIconBadgeNumber
     // 注册用户的通知
     [app registerUserNotificationSettings:settings];
 ```
-<<<<<<< HEAD
-
-=======
 </br>
->>>>>>> 03d1f4cea6846c54a2214365ce194fe66dbef46f
+
 ![](../images/uiapplocation.png)
 
 ```objc

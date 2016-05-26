@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>UIApplication | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../ios.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../ios/uidevice.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="3.9" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -614,7 +614,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.9" data-path="ios/uiapplication.html">
+        <li class="chapter active" data-level="3.9" data-path="ios/uiapplication.html">
             
                 
                     <a href="../ios/uiapplication.html">
@@ -739,12 +739,71 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_8">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="uiapplication">UIApplication</h1>
+<h3 id="1-uiapplication">1、 什么是UIApplication</h3>
+<ul>
+<li>UIApplication对象是应用程序的象征</li>
+<li>每一个应用都有自己的UIApplication对象，而且是单例的</li>
+<li>通过[UIApplication sharedApplication]可以获取这个单例对象</li>
+<li>利用UIApplication对象，能进行一些应用级别的操作</li>
+</ul>
+<h3 id="2uiapplication">2.UIApplication的作用:做应用级别的操作</h3>
+<ul>
+<li>1、 设置应用图标右上角的数字,图标需要手动清除,应用程序关闭,不 会自动清除.
+applicationIconBadgeNumber</li>
+<li>2、显示联网状态,告诉用户此应用正在联网 networkActivityIndicatorVisible</li>
+<li>3、打开一个资源<ul>
+<li>.URL:一个资源的唯一路径</li>
+<li>网络资源URL的组成==协议头://主机域名/路径 <a href="http://www.baidu.com/abc/1.png" target="_blank">http://www.baidu.com/abc/1.png</a></li>
+<li>本地资源URL的组成==协议头:///路径 本机域名可以不写 file:///User/apple/Desktop/1.png</li>
+</ul>
+</li>
+<li>4、UIApplication打开资源的好处:不用判断用什么软件打开,系统会自动根据 协议头判断。</li>
+<li><p>5、UIApplication管理状态栏</p>
+<ul>
+<li>ios7默认交给控制器,需要配置下,不交给控制器管理,就会交个 UIApplication管理。</li>
+<li>动画隐藏状态栏</li>
+<li>动画设置状态栏样式</li>
+</ul>
+</li>
+<li><p>显示图标右上角的数字</p>
+</li>
+</ul>
+<pre><code class="lang-objc">    <span class="hljs-comment">// 整个app中只有一个UIApplication，通过单例获取</span>
+    <span class="hljs-built_in">UIApplication</span> *app = [<span class="hljs-built_in">UIApplication</span> sharedApplication];
+
+    <span class="hljs-comment">// 2.UIApplication一般用来做一些应用级别的操作（app的提醒框，联网状态，打电话，打开网页，控制状态栏）</span>
+    <span class="hljs-comment">// 设置appIcon提醒数字，必须注册用户通知</span>
+    app<span class="hljs-variable">.applicationIconBadgeNumber</span> = <span class="hljs-number">10</span>;
+    <span class="hljs-comment">// 创建用户通知</span>
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:<span class="hljs-literal">nil</span>];
+    <span class="hljs-comment">// 注册用户的通知</span>
+    [app registerUserNotificationSettings:settings];
+</code></pre>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<p>=======
+</br></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>03d1f4cea6846c54a2214365ce194fe66dbef46f
+<img src="../images/uiapplocation.png" alt=""></p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="lang-objc"><span class="hljs-comment">// 设置联网状态</span>
+app<span class="hljs-variable">.networkActivityIndicatorVisible</span> = <span class="hljs-literal">YES</span>;
+</code></pre>
 
                     
                     </section>
@@ -755,10 +814,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../ios/uidevice.html" class="navigation navigation-prev " aria-label="Previous page: UIDevice 通知"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../ios.html" class="navigation navigation-next " aria-label="Next page: IOS 第三方框架"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

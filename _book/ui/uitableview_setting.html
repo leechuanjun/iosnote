@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>UITableView 基本设置 | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../ui/uitableview_cell.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../uitableview.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="1.8.2" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -271,7 +271,7 @@
         </li>
     
         
-        <li class="chapter " data-level="1.8.2" data-path="ui/uitableview_setting.html">
+        <li class="chapter active" data-level="1.8.2" data-path="ui/uitableview_setting.html">
             
                 
                     <a href="../ui/uitableview_setting.html">
@@ -739,12 +739,70 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_29">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="uitableview-setting">UITableView setting</h1>
+<ul>
+<li>设置选中后的颜色</li>
+</ul>
+<pre><code class="lang-objc">    <span class="hljs-built_in">UIView</span> *view = [[<span class="hljs-built_in">UIView</span> alloc] init];
+    view<span class="hljs-variable">.backgroundColor</span> = [<span class="hljs-built_in">UIColor</span> redColor];
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.selectedBackgroundView</span> = view;
+</code></pre>
+<ul>
+<li>设置分隔线</li>
+</ul>
+<pre><code class="lang-objc"><span class="hljs-keyword">self</span><span class="hljs-variable">.tableview</span><span class="hljs-variable">.separatorStyle</span> = UITableViewCellSeparatorStyleNone;
+</code></pre>
+<p> <img src="../images/tableview2.png" alt=""></br></br>
+<strong>如果想自定义分割线，先把系统的分割线隐藏，然后添加一个UIView</strong>
+-</p>
+<ul>
+<li>选择单行或者多行，或者不选择</li>
+</ul>
+<pre><code class="lang-objc"><span class="hljs-comment">//选择多行</span>
+<span class="hljs-keyword">self</span><span class="hljs-variable">.tableview</span><span class="hljs-variable">.allowsMultipleSelection</span> = <span class="hljs-literal">YES</span>;
+
+<span class="hljs-comment">//选择单行</span>
+<span class="hljs-keyword">self</span><span class="hljs-variable">.tableview</span><span class="hljs-variable">.allowsSelection</span> = <span class="hljs-literal">YES</span>;
+
+<span class="hljs-comment">//不选择</span>
+<span class="hljs-keyword">self</span><span class="hljs-variable">.tableview</span><span class="hljs-variable">.allowsSelection</span> = <span class="hljs-literal">NO</span>;
+</code></pre>
+<p><img src="../images/tableview.png" alt=""></p>
+<ul>
+<li>点击变色，然后恢复状态</li>
+</ul>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">void</span>)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView didSelectRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:<span class="hljs-literal">YES</span>];
+}
+</code></pre>
+<pre><code class="lang-objc"><span class="hljs-comment">/**
+ *  告诉tableView一共有多少组数据
+ */</span>
+- (<span class="hljs-built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="hljs-built_in">UITableView</span> *)tableView
+
+<span class="hljs-comment">/**
+ *  告诉tableView第section组有多少行
+ */</span>
+- (<span class="hljs-built_in">NSInteger</span>)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="hljs-built_in">NSInteger</span>)section
+
+<span class="hljs-comment">/**
+ *  告诉tableView第indexPath行显示怎样的cell
+ */</span>
+- (<span class="hljs-built_in">UITableViewCell</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath
+
+<span class="hljs-comment">/**
+ *  告诉tableView第section组的头部标题
+ */</span>
+- (<span class="hljs-built_in">NSString</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView titleForHeaderInSection:(<span class="hljs-built_in">NSInteger</span>)section
+
+<span class="hljs-comment">/**
+ *  告诉tableView第section组的尾部标题
+ */</span>
+- (<span class="hljs-built_in">NSString</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView titleForFooterInSection:(<span class="hljs-built_in">NSInteger</span>)section
+</code></pre>
 
                     
                     </section>
@@ -755,10 +813,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../uitableview.html" class="navigation navigation-prev " aria-label="Previous page: UITableview数据更新"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../ui/uitableview_cell.html" class="navigation navigation-next " aria-label="Next page: UITableView 不等高cell"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

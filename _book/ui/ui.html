@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>UI的变形 | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../ui/uitableview.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../ui/dev.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="1.7" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -222,7 +222,7 @@
         </li>
     
         
-        <li class="chapter " data-level="1.7" data-path="ui/ui.html">
+        <li class="chapter active" data-level="1.7" data-path="ui/ui.html">
             
                 
                     <a href="../ui/ui.html">
@@ -739,12 +739,44 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_22">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="ui">UI的变形</h1>
+<ul>
+<li><strong>transform:形变属性，能完成的功能：平移、缩放、旋转</strong></li>
+<li><p>利用动画来实现</p>
+<pre><code class="lang-objc"> [<span class="hljs-built_in">UIView</span> animateWithDuration:<span class="hljs-number">2.0</span> animations:^{
+
+     <span class="hljs-comment">// 缩放</span>
+      <span class="hljs-keyword">self</span><span class="hljs-variable">.tempView</span><span class="hljs-variable">.transform</span> = CGAffineTransformMakeScale(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>);
+
+      <span class="hljs-comment">// 平移</span>
+      <span class="hljs-keyword">self</span><span class="hljs-variable">.tempView</span><span class="hljs-variable">.transform</span> = CGAffineTransformMakeTranslation(-<span class="hljs-number">100</span>, <span class="hljs-number">100</span>);
+
+      <span class="hljs-comment">// 旋转objc</span>
+      <span class="hljs-keyword">self</span><span class="hljs-variable">.tempView</span><span class="hljs-variable">.transform</span> = CGAffineTransformMakeRotation(-M_PI_4);
+
+      CGAffineTransform translation = CGAffineTransformMakeTranslation(-<span class="hljs-number">100</span>, <span class="hljs-number">100</span>);
+
+      CGAffineTransform scaleTranslation = CGAffineTransformScale(translation, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>);
+
+      CGAffineTransform rotateScaleTranslation = CGAffineTransformRotate(scaleTranslation, M_PI_2);
+
+      <span class="hljs-keyword">self</span><span class="hljs-variable">.tempView</span><span class="hljs-variable">.transform</span> = rotateScaleTranslation;
+ }];
+</code></pre>
+</li>
+<li>有一种情况是根据上一个状态来变形的</li>
+<li>eg 根据tempView的上一个状态 加上缩放 1/4</li>
+<li>注意 1/4 可以写M_PI_4</li>
+</ul>
+<pre><code class="lang-objc"> <span class="hljs-keyword">self</span><span class="hljs-variable">.tempView</span><span class="hljs-variable">.transform</span> = CGAffineTransformRotate(<span class="hljs-keyword">self</span><span class="hljs-variable">.tempView</span><span class="hljs-variable">.transform</span>, M_PI_4);
+</code></pre>
+<ul>
+<li>清空transform，以前的平移、缩放、旋转都会消失<pre><code class="lang-objc">   <span class="hljs-keyword">self</span><span class="hljs-variable">.tempView</span><span class="hljs-variable">.transform</span> = CGAffineTransformIdentity;
+</code></pre>
+</li>
+</ul>
 
                     
                     </section>
@@ -755,10 +787,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../ui/dev.html" class="navigation navigation-prev " aria-label="Previous page: dev设备分辨率"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../ui/uitableview.html" class="navigation navigation-next " aria-label="Next page: UITableView"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

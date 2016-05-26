@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>dev设备分辨率 | 晓勇IOS的养成方式</title>
+        <title>UIDevice 通知 | 晓勇IOS的养成方式</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.0.3">
@@ -18,10 +18,10 @@
     
     
     
-    <link rel="next" href="../ui/ui.html" />
+    <link rel="next" href="../ios/uiapplication.html" />
     
     
-    <link rel="prev" href="../ui/masonry.html" />
+    <link rel="prev" href="../.html" />
     
 
         
@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="1.6.1" data-basepath=".." data-revision="1464220837383">
+    <div class="book"  data-level="3.8" data-basepath=".." data-revision="1464220837383">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
                 
     
         
-        <li class="chapter active" data-level="1.6.1" data-path="ui/dev.html">
+        <li class="chapter " data-level="1.6.1" data-path="ui/dev.html">
             
                 
                     <a href="../ui/dev.html">
@@ -598,7 +598,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.8" data-path="ios/uidevice.html">
+        <li class="chapter active" data-level="3.8" data-path="ios/uidevice.html">
             
                 
                     <a href="../ios/uidevice.html">
@@ -739,12 +739,21 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_9">
                     
-                        <h1 id="dev">dev设备分辨率</h1>
-<p><img src="../images/device.png" alt=""></p>
-<h2 id="app-icons-on-ipad-and-iphonexcode">App Icons on iPad and iPhone(在xcode里面的帮助文档)</h2>
-<p>有icon标准</p>
+                        <h1 id="uidevice-">UIDevice 通知</h1>
+<ul>
+<li><p>UIDevice类提供了一个单粒对象，它代表着设备，通过它可以获得一些设备相关的信息，比如电池电量值(batteryLevel)、电池状态(batteryState)、设备的类型(model，比如iPod、iPhone等)、设备的系统(systemVersion)</p>
+</li>
+<li><p>通过[UIDevice currentDevice]可以获取这个单粒对象</p>
+</li>
+</ul>
+<p>UIDevice对象会不间断地发布一些通知，下列是UIDevice对象所发布通知的名称常量：</p>
+<pre><code class="lang-objc">UIDeviceOrientationDidChangeNotification <span class="hljs-comment">// 设备旋转</span>
+UIDeviceBatteryStateDidChangeNotification <span class="hljs-comment">// 电池状态改变</span>
+UIDeviceBatteryLevelDidChangeNotification <span class="hljs-comment">// 电池电量改变</span>
+UIDeviceProximityStateDidChangeNotification <span class="hljs-comment">//近距离传感器(比如设备贴近了使用者的脸部)</span>
+</code></pre>
 
                     
                     </section>
@@ -755,10 +764,10 @@
         </div>
 
         
-        <a href="../ui/masonry.html" class="navigation navigation-prev " aria-label="Previous page: masonry(自动布局)"><i class="fa fa-angle-left"></i></a>
+        <a href="../.html" class="navigation navigation-prev " aria-label="Previous page: Notification 常量通知"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../ui/ui.html" class="navigation navigation-next " aria-label="Next page: UI的变形"><i class="fa fa-angle-right"></i></a>
+        <a href="../ios/uiapplication.html" class="navigation navigation-next " aria-label="Next page: UIApplication"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
