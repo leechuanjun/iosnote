@@ -22,6 +22,7 @@
    * [app icon 和启动图片](ui/app_icon.md)
    * [UIPickView](ui/uipickview.md)
        * [UIDatePciker](ui/uidatepciker.md)
+   * [隐藏Status bar](ui/status_bar.md)
 * [OC 语法](oc/README.md)
 * [IOS 编程](ios/README.md)
    * [定时器](ios/time.md)
@@ -34,5 +35,7 @@
        * [Notification 常量通知](.md)
    * [UIDevice 通知](ios/uidevice.md)
    * [UIApplication](ios/uiapplication.md)
+   * [AppDelegate](ios/appdelegate.md)
+   * [IOS 的启动过程](ios/ios.md)
 * [IOS 第三方框架](ios.md)
 

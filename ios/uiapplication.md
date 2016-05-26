@@ -37,6 +37,7 @@ applicationIconBadgeNumber
 
 ![](../images/uiapplocation.png)
 
+### 设置联网状态
 ```objc
 // 设置联网状态
 app.networkActivityIndicatorVisible = YES;
