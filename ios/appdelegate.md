@@ -1,4 +1,9 @@
 # AppDelegate
+
+###生命周期
+![](../images/life.png)
+
+
 ```objc
 // 学习代理方法，只需要知道这个什么时候调用，这个方法可以用来干嘛
 
@@ -83,3 +88,7 @@ UIApplicationMain(int argc, char *argv[], NSString * __nullable principalClassNa
 - 2、创建UIApplicationDelegate对象，并且成为UIApplication对象代理，app.delegate = delegate
 - 3、开启一个主运行循环，处理事件，可以保持程序一直运行。
 - 4、加载info.plist，并且判断有木有指定main.storyboard,如果指定，就会去加载
+  - 根据Info.plist获得最主要storyboard的文件名,加载最主要的storyboard(如果有storyboard)
+    - 创建UIWindow
+    - 创建和设置UIWindow的rootViewController
+    - 显示窗口

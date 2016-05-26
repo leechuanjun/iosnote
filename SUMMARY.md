@@ -23,6 +23,9 @@
    * [UIPickView](ui/uipickview.md)
        * [UIDatePciker](ui/uidatepciker.md)
    * [隐藏Status bar](ui/status_bar.md)
+   * [ViewControl](ios/viewcontrol.md)
+   * [UIWindow](ui/uiwindow.md)
+   * [UINavigationController](ui/uinavigationcontroller)
 * [OC 语法](oc/README.md)
 * [IOS 编程](ios/README.md)
    * [定时器](ios/time.md)
@@ -37,5 +40,6 @@
    * [UIApplication](ios/uiapplication.md)
    * [AppDelegate](ios/appdelegate.md)
    * [IOS 的启动过程](ios/ios.md)
+   * [内存警告](.md)
 * [IOS 第三方框架](ios.md)
 
