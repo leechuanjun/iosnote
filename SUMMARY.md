@@ -25,7 +25,7 @@
    * [隐藏Status bar](ui/status_bar.md)
    * [ViewControl](ios/viewcontrol.md)
    * [UIWindow](ui/uiwindow.md)
-   * [UINavigationController](ui/uinavigationcontroller)
+   * [UINavigationController](ui/uinavigationcontroller.md)
 * [OC 语法](oc/README.md)
 * [IOS 编程](ios/README.md)
    * [定时器](ios/time.md)

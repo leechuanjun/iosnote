@@ -10,8 +10,7 @@
     - 创建和设置UIWindow的rootViewController
     - 显示窗口
 
-###生命周期
-![](../images/life.png)
+
 
 </br>
 ![](../images/iosstart.png)

@@ -1,6 +1,6 @@
 # AppDelegate
 
-###生命周期
+###控制器View的生命周期顺序
 ![](../images/life.png)
 
 

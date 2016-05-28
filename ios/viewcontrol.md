@@ -8,6 +8,9 @@
 
 - 控制器的view加载完毕就会调用viewDidLoad方法
 
+###控制器View的生命周期顺序
+![](../images/life.png)
+
 ###ViewController的view的创建
 ![](../images/viewcontrol.png)
 
