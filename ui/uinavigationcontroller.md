@@ -83,6 +83,37 @@
 
 ```
 
+###利用block来传输数据
+```objc
+{
+    ZJCAddVeiw *c = segue.destinationViewController;
+
+        c.block = ^(ZJCChatData * data)
+        {
+            [self.array addObject:data];
+
+            [self.tableView reloadData];
+        };
+}
+
+//定义block
+typedef void(^ZJCAddVeiwBlock)(ZJCChatData * data);
+
+@property (nonatomic,copy) ZJCAddVeiwBlock block;
+
+- (IBAction)recond:(id)sender {
+    ZJCChatData *data = [[ZJCChatData alloc] init];
+    data.name = self.name.text;
+    data.tel = self.tel.text;
+
+    if (self.block) {
+        self.block(data);
+    }
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
+```
+
 ##修改导航栏的内容
 ## <font color=red size=5> * 导航栏的内容由栈顶控制器的navigationItem属性决定</font>
 
@@ -136,6 +167,20 @@
 
  ![](../images/sugue3.png)
 
+####除了push之外，还有另外一种控制器的切换方式，那就是Modal
+
+- 任何控制器都能通过Modal的形式展示出来
+
+- Modal的默认效果：新控制器从屏幕的最底部往上钻，直到盖住之前的控制器为止
+
+```objc
+//以Modal的形式展示控制器
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^)(void))completion
+
+//关闭当初Modal出来的控制器
+- (void)dismissViewControllerAnimated: (BOOL)flag completion: (void (^)(void))completion;
+```
+
 ####接下来研究performSegueWithIdentifier:sender:方法的完整执行过程
 - 1、根据identifier去storyboard中找到对应的线，新建UIStoryboardSegue对象
 设置Segue对象的sourceViewController（来源控制器）
@@ -150,3 +195,22 @@
    - 如果segue的style是push，取得sourceViewController所在的UINavigationController调用UINavigationController的push方法将destinationViewController压入栈中，完成跳转
    - 如果segue的style是modal调用sourceViewController的presentViewController方法将destinationViewController展示出来
 
+- 自定义navigation的图标
+
+```objc
+//自定义一个button
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"navigationbar_friendsearch"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"navigationbar_friendsearch_highlighted"] forState:UIControlStateHighlighted];
+
+//设置button的大小为图片大小
+    [btn sizeToFit];
+//left 为 left UIBarButtonItem
+    self.left.customView = btn;
+```
+
+- 设置navigation的颜色
+
+```objc
+self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.809 green:0.491 blue:1.000 alpha:1.000];
+```

@@ -26,6 +26,7 @@
    * [ViewControl](ios/viewcontrol.md)
    * [UIWindow](ui/uiwindow.md)
    * [UINavigationController](ui/uinavigationcontroller.md)
+   * [UITabBarController](ui/uitabbarcontroller.md)
 * [OC 语法](oc/README.md)
 * [IOS 编程](ios/README.md)
    * [定时器](ios/time.md)
@@ -41,5 +42,9 @@
    * [AppDelegate](ios/appdelegate.md)
    * [IOS 的启动过程](ios/ios.md)
    * [内存警告](.md)
+   * [iOS应用数据存储的常用方式](ios.md)
+   * [IOS 事件](ios.md)
+       * [UIView的触摸事件处理](uiview.md)
+       * [UIGestureRecognizer(手势)](uigesturerecognizer.md)
 * [IOS 第三方框架](ios.md)
 
