@@ -42,4 +42,5 @@
    * [IOS 的启动过程](ios/ios.md)
    * [iOS应用数据存储的常用方式](ios/iosdatamd.md)
 * [百思不得姐专题](bai_si_bu_de_jie_zhuan_ti.md)
+   * TabBar配置、颜色说明和pch文件设置
 
