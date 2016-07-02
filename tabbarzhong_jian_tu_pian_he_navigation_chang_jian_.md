@@ -55,4 +55,10 @@
 }
 ```
 
+##方法二（自定义UItabBar）
+- 因为UItabBarControl 里面的 tabBar 属性是只读的，不能修改，所以我们使用KVC
+```objc
+  [self setValue:[[ZJCTabBar alloc] init] forKey:@"tabBar"];
+```
+
 ![](屏幕快照 2016-07-02 16.16.10.png)
