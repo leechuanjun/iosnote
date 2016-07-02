@@ -161,7 +161,7 @@ selectedAttrs[NSForegroundColorAttributeName] = [UIColor darkGrayColor];
 
 ## 在Build Setting中配置宏
 - 如果项目中有些宏找不到, 可能是配置在Build Setting中
-![image](Images/Snip20151105_9.png)
+![](images/Snip20151105_9.png)
 
 - 注意点:宏的名字不能全部是小写字母
 
