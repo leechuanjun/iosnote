@@ -36,9 +36,9 @@ UIImage *selectedImage = [tempImage imageWithRenderingMode:UIImageRenderingModeA
 vc.tabBarItem.selectedImage = selectedImage;
 ```
 
-- 直接在xcassets文件中配置
-![image](images/Snip20151105_1.png)
-![](../images/Snip20151105_1.png)
+- 直接在xcassets文件中配置![](Snip20151105_1.png)
+
+
 
 ## 设置TabBarItem的文字属性
 - 直接设置每一个tabBarItem对象
@@ -138,7 +138,7 @@ selectedAttrs[NSForegroundColorAttributeName] = [UIColor darkGrayColor];
                 - 白色 : #ffffffff
 
 ## PCH文件可能引发的错误
-![image](Images/Snip20151105_8.png)
+![](images/Snip20151105_8.png)
 - 解决方案
 
 ```objc
