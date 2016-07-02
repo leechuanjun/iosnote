@@ -138,7 +138,8 @@ selectedAttrs[NSForegroundColorAttributeName] = [UIColor darkGrayColor];
                 - 白色 : #ffffffff
 
 ## PCH文件可能引发的错误
-![](images/Snip20151105_8.png)
+
+![](Snip20151105_8.png)
 - 解决方案
 
 ```objc
@@ -161,7 +162,7 @@ selectedAttrs[NSForegroundColorAttributeName] = [UIColor darkGrayColor];
 
 ## 在Build Setting中配置宏
 - 如果项目中有些宏找不到, 可能是配置在Build Setting中
-![](images/Snip20151105_9.png)
+![](../images/Snip20151105_9.png)
 
 - 注意点:宏的名字不能全部是小写字母
 
