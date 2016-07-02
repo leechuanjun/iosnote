@@ -137,6 +137,13 @@ selectedAttrs[NSForegroundColorAttributeName] = [UIColor darkGrayColor];
                 - 黑色 : #ff000000
                 - 白色 : #ffffffff
 
+## PCH文件 的导入
+![](屏幕快照 2016-07-02 13.37.37.png)
+
+![](屏幕快照 2016-07-02 13.36.45.png)
+
+![](屏幕快照 2016-07-02 13.36.25.png)
+
 ## PCH文件可能引发的错误
 
 ![](Snip20151105_8.png)
