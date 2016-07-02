@@ -40,5 +40,5 @@
    * [UIApplication](ios/uiapplication.md)
    * [AppDelegate](ios/appdelegate.md)
    * [IOS 的启动过程](ios/ios.md)
-   * [iOS应用数据存储的常用方式](iosdata.md)
+   * [iOS应用数据存储的常用方式](ios/iosdatamd.md)
 
