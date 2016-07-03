@@ -56,9 +56,77 @@
 ```
 
 ##方法二（自定义UItabBar）
-- 因为UItabBarControl 里面的 tabBar 属性是只读的，不能修改，所以我们使用KVC
+- 因为UITabBarController 里面的 tabBar 属性是只读的，不能修改，所以我们使用KVC
+
+```OBJC
+@property(nonatomic,readonly) UITabBar *tabBar NS_AVAILABLE_IOS(3_0); 
+```
+
 ```objc
+  //这样设置就等于self.tabBar = [[ZJCTabBar alloc] init]；
   [self setValue:[[ZJCTabBar alloc] init] forKey:@"tabBar"];
+```
+
+- 自定义的UItabBar
+
+```objc
+/**
+ *  布局子控件
+ */
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    // NSClassFromString(@"UITabBarButton") == [UITabBarButton class]
+    // NSClassFromString(@"UIButton") == [UIButton class]
+    
+    /**** 设置所有UITabBarButton的frame ****/
+    // 按钮的尺寸
+    CGFloat buttonW = self.frame.size.width / 5;
+    CGFloat buttonH = self.frame.size.height;
+    CGFloat buttonY = 0;
+    // 按钮索引
+    int buttonIndex = 0;
+    
+    for (UIView *subview in self.subviews) {
+        // 过滤掉非UITabBarButton
+        //if (![@"UITabBarButton" isEqualToString:NSStringFromClass(subview.class)]) continue;
+        if (subview.class != NSClassFromString(@"UITabBarButton")) continue;
+        
+        // 设置frame
+        CGFloat buttonX = buttonIndex * buttonW;
+        if (buttonIndex >= 2) { // 右边的2个UITabBarButton
+            buttonX += buttonW;
+        }
+        subview.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
+        
+        // 增加索引
+        buttonIndex++;
+    }
+    
+    /**** 设置中间的发布按钮的frame ****/
+    self.publishButton.frame = CGRectMake(0, 0, buttonW, buttonH);
+    self.publishButton.center = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5);
+}
+
+```
+
+```objc
+//中间按钮懒加载
+- (UIButton *)centerButton
+{
+    if (_centerButton == nil) {
+        _centerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _centerButton.backgroundColor = XMGRandomColor;
+        [_centerButton addTarget:self action:@selector(centerButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        [_centerButton setImage:[UIImage imageNamed:@"tabBar_publish_icon"] forState:UIControlStateNormal];
+        [_centerButton setImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] forState:UIControlStateHighlighted];
+        _centerButton.frame = CGRectMake(0, 0, self.tabBar.frame.size.width / 5, self.tabBar.frame.size.height);
+        _centerButton.center = CGPointMake(self.tabBar.frame.size.width / 2, self.tabBar.frame.size.height / 2);
+        
+    }
+    return _centerButton;
+}
 ```
 
 ![](屏幕快照 2016-07-02 16.16.10.png)
