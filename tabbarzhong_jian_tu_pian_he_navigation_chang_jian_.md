@@ -130,3 +130,6 @@
 ```
 
 ![](屏幕快照 2016-07-02 16.16.10.png)
+
+
+/Users/zhongjc_bill/ios/work/百思不得姐/Baisi/百思不得姐/百思不得姐/Classes/Other - 其他/Category/UIBarButtonItem+ZJC.m:23:1: Convenience initializer missing a 'self' call to another initializer
