@@ -59,6 +59,8 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
 
 - ##监听某个控件的行为
 
+![](屏幕快照 2016-07-06 13.23.33.png)
+
 - ###方法一（如果某个控件继承UIControl,如UITextField）
 - 就利用控件本身有的addTarget
 
@@ -95,5 +97,35 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
 ```
 
 - ###方法二（利用控件的代理方法）
-<font size=1 color=green>文字内容</font>
-<font  color = red size = 3 > dsfad </font>
+- ##<font  color = red > 特别注意，如果利用代理的方法，可能会造成设置双重代理，导致其中一个代理失效</font>
+
+```objc
+
+- (void)setup
+{
+    self.tintColor = [UIColor whiteColor];
+    
+    [self changePlaceHolderColor:[UIColor lightGrayColor]];
+    
+    //控件设置了代理为自己，但是引用控件的控制器也有可能设置控件代理为控制器，设置了双重代理，只有一个代理有效
+    self.delegate = self;
+}
+
+/**
+ *  点击UITextField
+ */
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+{
+    [self changePlaceHolderColor:[UIColor whiteColor]];
+}
+
+/**
+ *  点击UITextField结束
+ */
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self changePlaceHolderColor:[UIColor lightGrayColor]];
+}
+
+```
+
