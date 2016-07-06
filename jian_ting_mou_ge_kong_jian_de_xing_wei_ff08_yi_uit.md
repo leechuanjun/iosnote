@@ -129,3 +129,5 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
 
 ```
 
+- ###方法三（利用通知Notification方法）
+
