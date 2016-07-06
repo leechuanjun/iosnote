@@ -60,6 +60,40 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
 - ##监听某个控件的行为
 
 - ###方法一（如果某个控件继承UIControl,如UITextField）
-```objc
+- 就利用控件本身有的addTarget
 
+```objc
+/**
+ *  初始化
+ */
+- (void)setup
+{
+    self.tintColor = [UIColor whiteColor];
+    
+    [self changePlaceHolderColor:[UIColor lightGrayColor]];
+    
+    [self addTarget:self action:@selector(touchBegin) forControlEvents:UIControlEventEditingDidBegin];
+    
+    [self addTarget:self action:@selector(touchEnd) forControlEvents:UIControlEventEditingDidEnd];
+}
+
+/**
+ *  点击UITextField
+ */
+- (void)touchBegin
+{
+    [self changePlaceHolderColor:[UIColor whiteColor]];
+}
+
+/**
+ *  点击UITextField结束
+ */
+- (void)touchEnd
+{
+    [self changePlaceHolderColor:[UIColor lightGrayColor]];
+}
 ```
+
+- ###方法二（利用控件的代理方法）
+<font size=1 color=green>文字内容</font>
+<font  color = red size = 3 > dsfad </font>
