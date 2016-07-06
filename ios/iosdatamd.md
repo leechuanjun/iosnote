@@ -44,4 +44,28 @@ NSArray *array =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUse
 NSString *documents = [array objectAtIndex:0];
 ```objc
 
-###Cache
+###Library/Caches：
+```objc
+    NSArray *arr = @[@"123",@"fff"];
+    
+    // 获取Cache文件路径
+    // NSSearchPathDirectory:搜索的目录
+    // NSSearchPathDomainMask：搜索范围 NSUserDomainMask:表示在用户的手机上查找
+    // expandTilde 是否展开全路径，如果没有展开，应用的沙盒路径就是~
+    // 存储一定要要展开路径
+    NSString *cachePaht = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    
+    // 拼接文件名
+    NSString *filePath = [cachePaht stringByAppendingPathComponent:@"personArr.plist"]; 
+   
+    NSLog(@"%@",cachePaht);
+    
+    // File:文件的全路径
+    [arr writeToFile:filePath atomically:YES];
+```
+
+###temp
+
+```objc
+ NSString *tmp = NSTemporaryDirectory();
+```
