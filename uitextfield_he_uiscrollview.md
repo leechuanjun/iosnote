@@ -105,10 +105,10 @@ self.navigationItem.titleView = label;
 - 上下滚动(垂直滚动)
     - 设置A的高度(这个高度就是UIScrollView的内容高度: contentSize.height)
 
-    ![](../Images/Snip20151109_202.png)
+    ![](Snip20151109_202.png)
     - 设置A在UIScrollView中左右居中(水平居中)
 
-    ![](../Images/Snip20151109_203.png)
+   ![](Snip20151109_203.png)
 - 左右滚动(水平滚动)
     - 设置A的宽度(这个宽度就是UIScrollView的内容宽度: contentSize.width)
 
