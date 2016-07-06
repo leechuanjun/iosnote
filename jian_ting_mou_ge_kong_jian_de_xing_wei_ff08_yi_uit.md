@@ -171,5 +171,26 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
 }
 ```
 
+- ###方法四（利用控件固有的方法或者特性）
+
+```objc
+///**
+// *  点击UITextField
+// */
+- (BOOL)becomeFirstResponder
+{
+    [self changePlaceHolderColor:[UIColor whiteColor]];
+    return [super becomeFirstResponder];
+}
+
+///**
+// *  点击UITextField结束
+// */
+- (BOOL)resignFirstResponder
+{
+    [self changePlaceHolderColor:[UIColor lightGrayColor]];
+    return [super resignFirstResponder];
+}
+```
 
 
