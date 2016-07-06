@@ -22,4 +22,22 @@
 
 - Library/Preference：保存应用的所有偏好设置，iOS的Settings(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录
 
-应用沙盒目录的常见获取方式
+##应用沙盒目录的常见获取方式
+
+Documents：(2种方式)
+利用沙盒根目录拼接”Documents”字符串
+
+##方法一
+```objc
+// 不建议采用，因为新版本的操作系统可能会修改目录名
+NSString *home = NSHomeDirectory();
+NSString *documents = [home stringByAppendingPathComponent:@"Documents"];
+
+```
+##方法二
+利用NSSearchPathForDirectoriesInDomains函数
+// NSUserDomainMask 代表从用户文件夹下找
+// YES 代表展开路径中的波浪字符“~”（即系绝对路径）
+NSArray *array =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, NO);
+// 在iOS中，只有一个目录跟传入的参数匹配，所以这个集合里面只有一个元素
+NSString *documents = [array objectAtIndex:0];
