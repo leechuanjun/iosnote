@@ -56,3 +56,9 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
     self.attributedPlaceholder  = [[NSAttributedString alloc] initWithString:self.placeholder attributes:attributes];
 ```
 
+- ##监听某个控件的行为
+
+- ###方法一（如果某个控件继承UIControl,如UITextField）
+```objc
+
+```
