@@ -131,3 +131,45 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
 
 - ###方法三（利用通知Notification方法）
 
+```objc
+/**
+ *  初始化
+ */
+- (void)setup
+{
+    
+    self.tintColor = [UIColor whiteColor];
+    
+    [self changePlaceHolderColor:[UIColor lightGrayColor]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(touchBegin) name:UITextFieldTextDidBeginEditingNotification object:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(touchEnd) name:UITextFieldTextDidEndEditingNotification object:self];
+    
+}
+
+//添加了通知，记得要移除，不然会出现坏块访问
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+/**
+ *  点击UITextField
+ */
+- (void)touchBegin
+{
+    [self changePlaceHolderColor:[UIColor whiteColor]];
+}
+
+/**
+ *  点击UITextField结束
+ */
+- (void)touchEnd
+{
+    [self changePlaceHolderColor:[UIColor lightGrayColor]];
+}
+```
+
+
+
