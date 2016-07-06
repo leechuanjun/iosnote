@@ -51,6 +51,7 @@ static NSString * const XMGPlaceholderColorKey = @"placeholderLabel.textColor";
     
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     
+    //把占位字符颜色改为白色
     attributes[NSForegroundColorAttributeName] = [UIColor whiteColor];
     
     self.attributedPlaceholder  = [[NSAttributedString alloc] initWithString:self.placeholder attributes:attributes];
