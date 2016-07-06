@@ -120,7 +120,8 @@ self.navigationItem.titleView = label;
     - 设置A的高度(这个高度就是UIScrollView的内容高度: contentSize.height)
 
     ![](../Images/Snip20151109_232.png)
-    ![](../Images/Snip20151109_229.png)
+    ![](./Snip20151109_229.png)
+    ![](Snip20151109_229.png)
 
 ## 修改UITextField占位文字的颜色
 - 使用attributedPlaceholder
