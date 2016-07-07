@@ -179,6 +179,8 @@ log 打印
 syncSerialsyncSerial
 ```
 
+
+
 - ####异步函数 + 串行队列：会开启新的线程，但是任务是串行的，执行完一个任务，再执行下一个任务
 
 ```objc
@@ -264,3 +266,19 @@ dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         });
 });
 ```
+
+##一次性代码
+- 使用dispatch_once函数能保证某段代码在程序运行过程中只被执行1次
+```objc
+static dispatch_once_t onceToken;
+dispatch_once(&onceToken, ^{
+    // 只执行1次的代码(这里面默认是线程安全的)
+});
+```
+
+##队列组
+- 有这么1种需求
+ - 首先：分别异步执行2个耗时的操作
+ - 其次：等2个异步操作都执行完毕后，再回到主线程执行操作
+
+- 如果想要快速高效地实现上述需求，可以考虑用队列组
