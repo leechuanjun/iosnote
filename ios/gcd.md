@@ -282,3 +282,16 @@ dispatch_once(&onceToken, ^{
  - 其次：等2个异步操作都执行完毕后，再回到主线程执行操作
 
 - 如果想要快速高效地实现上述需求，可以考虑用队列组
+
+```objc
+dispatch_group_t group =  dispatch_group_create();
+dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // 执行1个耗时的异步操作
+});
+dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // 执行1个耗时的异步操作
+});
+dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+    // 等前面的异步操作都执行完毕后，回到主线程...
+});
+```
