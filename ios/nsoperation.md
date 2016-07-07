@@ -192,6 +192,13 @@ log 打印
     [queue addOperation:op];
 }
 
+- (void)print:(NSString *)argv
+{
+    NSLog(@"----------print,%@",argv);
+    NSLog(@"%@",[NSThread currentThread]);
+}
+
+
 log 打印
 掌握-NSOperationQueue[1680:294419] ---------- print,hello
 掌握-NSOperationQueue[1680:294419] <NSThread: 0x7fd37942f640>{number = 2, name = (null)}
