@@ -76,3 +76,105 @@ dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", DISPATCH_QUEUE
 dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", NULL);
 ```
 
+#例子
+- ####同步函数 + 主队列：
+- <font color = red> 使用sync函数往当前串行队列中添加任务，会卡住当前的串行队列<font>
+
+```objc`
+/**
+ * 同步函数 + 主队列：
+ */
+- (void)syncMain
+{
+    NSLog(@"syncMain ----- begin");
+    
+    // 1.获得主队列
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    
+    // 2.将任务加入队列
+    dispatch_sync(queue, ^{
+        NSLog(@"1-----%@", [NSThread currentThread]);
+    });
+    dispatch_sync(queue, ^{
+        NSLog(@"2-----%@", [NSThread currentThread]);
+    });
+    dispatch_sync(queue, ^{
+        NSLog(@"3-----%@", [NSThread currentThread]);
+    });
+    
+    NSLog(@"syncMain ----- end");
+}
+
+log 打印
+//07-GCD的基本使用[1399:122292] syncMain ----- begin
+
+```
+
+- ####异步函数 + 主队列：只在主线程中执行任务，不会新建线程
+- <font color = red> 特别注意：异步函数执行顺序是，先执行函数内的代码，后执行队列的代码<font>
+
+```objc
+/**
+ * 异步函数 + 主队列：只在主线程中执行任务
+ */
+- (void)asyncMain
+{
+    // 1.获得主队列
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    
+    // 2.将任务加入队列
+    dispatch_async(queue, ^{
+        NSLog(@"1-----%@", [NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"2-----%@", [NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"3-----%@", [NSThread currentThread]);
+    });
+    
+    NSLog(@"asyncMain--------end");
+}
+
+log 打印
+ 07-GCD的基本使用[1418:124881] asyncMain--------end
+ 07-GCD的基本使用[1418:124881] 1-----<NSThread: 0x7fbfe9602c40>{number = 1, name = main}
+ 07-GCD的基本使用[1418:124881] 2-----<NSThread: 0x7fbfe9602c40>{number = 1, name = main}
+ 07-GCD的基本使用[1418:124881] 3-----<NSThread: 0x7fbfe9602c40>{number = 1, name = main}
+```
+
+- ####同步函数 + 串行队列：不会开启新的线程，在当前线程执行任务。任务是串行的，执行完一个任务，再执行下一个任务
+
+- <font color = red> 特别注意：异步函数执行顺序是，先执行队列的代码，后执行函数内的代码<font>
+
+```objc
+/**
+ * 同步函数 + 串行队列：不会开启新的线程，在当前线程执行任务。任务是串行的，执行完一个任务，再执行下一个任务
+ */
+- (void)syncSerial
+{
+    // 1.创建串行队列
+    dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", DISPATCH_QUEUE_SERIAL);
+    
+    // 2.将任务加入队列
+    dispatch_sync(queue, ^{
+        NSLog(@"1-----%@", [NSThread currentThread]);
+    });
+    dispatch_sync(queue, ^{
+        NSLog(@"2-----%@", [NSThread currentThread]);
+    });
+    dispatch_sync(queue, ^{
+        NSLog(@"3-----%@", [NSThread currentThread]);
+    });
+    
+    NSLog(@"syncSerial--------end");
+
+}
+
+log 打印
+-GCD的基本使用[1443:127744] 1-----<NSThread: 0x7f9b697060a0>{number = 1, name = main}
+-GCD的基本使用[1443:127744] 2-----<NSThread: 0x7f9b697060a0>{number = 1, name = main}
+-GCD的基本使用[1443:127744] 3-----<NSThread: 0x7f9b697060a0>{number = 1, name = main}
+-GCD的基本使用[1443:127744] syncSerial--------end
+syncSerialsyncSerial
+```
