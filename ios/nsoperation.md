@@ -248,6 +248,22 @@ log 打印
 }
 
 log 打印
+2016-07-07 16:35:45.260 04-掌握-操作依赖[1715:299708] download1----<NSThread: 0x7f9f61e1c040>{number = 2, name = (null)}
+2016-07-07 16:35:45.260 04-掌握-操作依赖[1715:299697] download2----<NSThread: 0x7f9f61f0ec20>{number = 3, name = (null)}
+2016-07-07 16:35:45.260 04-掌握-操作依赖[1715:299747] download5----<NSThread: 0x7f9f61c1a990>{number = 4, name = (null)}
+2016-07-07 16:35:45.260 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.261 04-掌握-操作依赖[1715:299747] op5执行完毕---<NSThread: 0x7f9f61c1a990>{number = 4, name = (null)}
+2016-07-07 16:35:45.261 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.261 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.262 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.262 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.262 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.262 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.262 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.263 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.303 04-掌握-操作依赖[1715:299706] download4----<NSThread: 0x7f9f61f13fb0>{number = 5, name = (null)}
+2016-07-07 16:35:45.303 04-掌握-操作依赖[1715:299708] download3----<NSThread: 0x7f9f61e1c040>{number = 2, name = (null)}
+
 ```
 
 
