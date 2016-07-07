@@ -53,3 +53,35 @@ log 打印
 ```
 
 ##NSBlockOperation
+```objc
+//创建NSBlockOperation对象
++ (id)blockOperationWithBlock:(void (^)(void))block;
+
+//通过addExecutionBlock:方法添加更多的操作
+- (void)addExecutionBlock:(void (^)(void))block;
+```
+
+```objc
+- (void)test3
+{
+       
+    NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+                NSLog(@"----------NSBlockOperation1");
+                NSLog(@"%@",[NSThread currentThread]);
+            }];
+        
+    [op addExecutionBlock:^{
+        NSLog(@"----------NSBlockOperation2");
+        NSLog(@"%@",[NSThread currentThread]);
+    }];
+    
+    [op addExecutionBlock:^{
+        NSLog(@"----------NSBlockOperation3");
+        NSLog(@"%@",[NSThread currentThread]);
+    }];
+    
+    [op start];
+
+log 打印
+}
+```
