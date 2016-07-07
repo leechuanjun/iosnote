@@ -104,5 +104,41 @@ log 打印
 - (void)addOperationWithBlock:(void (^)(void))block;
 ```
 
+##
 
+- 当队列最大并发数为1时，表示串行
+```objc
+- (void)test1
+{
+     
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    //最大并发数
+    queue.maxConcurrentOperationCount = 1;
+    
+    [queue addOperationWithBlock:^{
+        NSLog(@"----------NSBlockOperation1");
+        NSLog(@"%@",[NSThread currentThread]);
+
+    }];
+    
+    [queue addOperationWithBlock:^{
+        NSLog(@"----------NSBlockOperation2");
+        NSLog(@"%@",[NSThread currentThread]);
+        
+    }];
+    
+    [queue addOperationWithBlock:^{
+        NSLog(@"----------NSBlockOperation3");
+        NSLog(@"%@",[NSThread currentThread]);
+        
+    }];
+    
+    [queue addOperationWithBlock:^{
+        NSLog(@"----------NSBlockOperation4");
+        NSLog(@"%@",[NSThread currentThread]);
+        
+    }];
+
+}
+```
 
