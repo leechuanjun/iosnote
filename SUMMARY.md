@@ -43,9 +43,9 @@
    * [iOS应用数据存储的常用方式](ios/iosdatamd.md)
    * [IOS 设置圆角](ios/ios_she_zhi_yuan_jiao.md)
    * [修改状态栏](ios/xiu_gai_zhuang_tai_lan.md)
+   * 单例模式
    * [多线程](ios/duo_xian_cheng.md)
        * [GCD](ios/gcd.md)
-   * 单例模式
 * [百思不得姐专题](bai_si_bu_de_jie_zhuan_ti.md)
    * [TabBar配置、颜色说明和pch文件设置](tabbarpei_zhi_3001_yan_se_shuo_ming_he_pch_wen_jia.md)
    * [TabBar中间图片和Navigation常见配置](tabbarzhong_jian_tu_pian_he_navigation_chang_jian_.md)
