@@ -7,3 +7,25 @@
 - NSInvocationOperation
 - NSBlockOperation
 - 自定义子类继承NSOperation，实现内部相应的方法
+
+##NSInvocationOperation
+- 注意
+- 默认情况下，调用了start方法后并不会开一条新线程去执行操作，而是在当前线程同步执行操作
+- 只有将NSOperation放到一个NSOperationQueue中，才会异步执行操作
+
+```objc
+- (void)test2
+{
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(print:) object:@"hello"];
+    
+    //不会开新线程
+    [op start];
+}
+
+
+log 
+-NSOperationQueue[1600:268010] ----------print,hello
+-NSOperationQueue[1600:268010] <NSThread: 0x7fb380f00ac0>{number = 1, name = main}
+```
