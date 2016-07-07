@@ -61,6 +61,8 @@ log 打印
 - (void)addExecutionBlock:(void (^)(void))block;
 ```
 
+- 注意：只要NSBlockOperation封装的操作数 > 1，就会异步执行操作
+
 ```objc
 - (void)test3
 {
@@ -83,5 +85,24 @@ log 打印
     [op start];
 
 log 打印
+掌握-NSOperationQueue[1651:279652] ----------NSBlockOperation1
+掌握-NSOperationQueue[1651:279652] <NSThread: 0x7fcae3505d60>{number = 1, name = main}
+掌握-NSOperationQueue[1651:279706] ----------NSBlockOperation2
+掌握-NSOperationQueue[1651:279713] ----------NSBlockOperation3
+掌握-NSOperationQueue[1651:279706] <NSThread: 0x7fcae360c250>{number = 2, name = (null)}
+掌握-NSOperationQueue[1651:279713] <NSThread: 0x7fcae3712400>{number = 3, name = (null)}
 }
 ```
+
+##NSOperationQueue
+- NSOperation可以调用start方法来执行任务，但默认是同步执行的
+- 如果将NSOperation添加到NSOperationQueue（操作队列）中，系统会自动异步执行NSOperation中的操作
+
+```objc
+添加操作到NSOperationQueue中
+- (void)addOperation:(NSOperation *)op;
+- (void)addOperationWithBlock:(void (^)(void))block;
+```
+
+
+
