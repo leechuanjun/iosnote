@@ -180,6 +180,7 @@ syncSerialsyncSerial
 ```
 
 - ####异步函数 + 串行队列：会开启新的线程，但是任务是串行的，执行完一个任务，再执行下一个任务
+
 ```objc
 /**
  * 异步函数 + 串行队列：会开启新的线程，但是任务是串行的，执行完一个任务，再执行下一个任务
@@ -202,4 +203,53 @@ syncSerialsyncSerial
     
      NSLog(@"asyncSerial--------end");
 }
+
+log 打印
+GCD的基本使用[1487:132988] asyncSerial--------end
+GCD的基本使用[1487:133212] 1-----<NSThread: 0x7fdcb2e35090>{number = 2, name = (null)}
+GCD的基本使用[1487:133212] 2-----<NSThread: 0x7fdcb2e35090>{number = 2, name = (null)}
+GCD的基本使用[1487:133212] 3-----<NSThread: 0x7fdcb2e35090>{number = 2, name = (null)}
+```
+
+- ####异步函数 + 并发队列：可以同时开启多条线程
+
+```objc
+/**
+ * 异步函数 + 并发队列：可以同时开启多条线程
+ */
+- (void)asyncConcurrent
+{
+    // 1.创建一个并发队列
+    // label : 相当于队列的名字
+//    dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", DISPATCH_QUEUE_CONCURRENT);
+    
+    // 1.获得全局的并发队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    // 2.将任务加入队列
+    dispatch_async(queue, ^{
+        for (NSInteger i = 0; i<10; i++) {
+            NSLog(@"1-----%@", [NSThread currentThread]);
+        }
+    });
+    dispatch_async(queue, ^{
+        for (NSInteger i = 0; i<10; i++) {
+            NSLog(@"2-----%@", [NSThread currentThread]);
+        }
+    });
+    dispatch_async(queue, ^{
+        for (NSInteger i = 0; i<10; i++) {
+            NSLog(@"3-----%@", [NSThread currentThread]);
+        }
+    });
+    
+    NSLog(@"asyncConcurrent--------end");
+
+}
+
+log 打印
+asyncConcurrent--------end
+2016-07-06 19:57:35.556 07-GCD的基本使用[1520:136336] 1-----<NSThread: 0x7fd2394218c0>{number = 2, name = (null)}
+2016-07-06 19:57:35.556 07-GCD的基本使用[1520:136327] 2-----<NSThread: 0x7fd239707210>{number = 3, name = (null)}
+2016-07-06 19:57:35.556 07-GCD的基本使用[1520:136343] 3-----<NSThread: 0x7fd2395031d0>{number = 4, name = (null)}
 ```
