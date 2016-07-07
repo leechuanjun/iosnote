@@ -159,5 +159,41 @@ log 打印
 }
 ```
 
+##队列的取消、暂停、恢复
+```objc
+//取消队列的所有操作
+- (void)cancelAllOperations;
+提示：也可以调用NSOperation的- (void)cancel方法取消单个操作
+
+//暂停和恢复队列
+- (void)setSuspended:(BOOL)b; // YES代表暂停队列，NO代表恢复队列
+- (BOOL)isSuspended;
+```
+
+## 操作的监听
+```objc
+//可以监听一个操作的执行完毕
+- (void (^)(void))completionBlock;
+- (void)setCompletionBlock:(void (^)(void))block;
+```
+
+```objc
+- (void)test2
+{
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(print:) object:@"hello"];
+    
+    [op setCompletionBlock:^{
+        NSLog(@"完了");
+    }];
+    
+    [queue addOperation:op];
+}
+
+log 打印
+```
+
 
 
