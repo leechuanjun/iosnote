@@ -193,6 +193,9 @@ log 打印
 }
 
 log 打印
+掌握-NSOperationQueue[1680:294419] ---------- print,hello
+掌握-NSOperationQueue[1680:294419] <NSThread: 0x7fd37942f640>{number = 2, name = (null)}
+掌握-NSOperationQueue[1680:294423] 完了
 ```
 
 
