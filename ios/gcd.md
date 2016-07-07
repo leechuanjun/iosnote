@@ -296,5 +296,41 @@ dispatch_group_notify(group, dispatch_get_main_queue(), ^{
 });
 ```
 
+##保证执行顺序 barrier
+
+```objc
+- (void)barrier
+{
+
+    //比如一定要让操作1和2执行完后，才能执行操作3和4
+    dispatch_queue_t queue = dispatch_queue_create("12312312", DISPATCH_QUEUE_CONCURRENT);
+    
+    dispatch_async(queue, ^{
+        NSLog(@"----1-----%@", [NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"----2-----%@", [NSThread currentThread]);
+    });
+    
+    dispatch_barrier_async(queue, ^{
+        NSLog(@"----barrier-----%@", [NSThread currentThread]);
+    });
+    
+    dispatch_async(queue, ^{
+        NSLog(@"----3-----%@", [NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"----4-----%@", [NSThread currentThread]);
+    });
+}
+
+log 打印
+2016-07-07 12:16:26.756 09-掌握-GCD的其他常用函数[1086:78056] ----1-----<NSThread: 0x7fa8ba708580>{number = 2, name = (null)}
+2016-07-07 12:16:26.756 09-掌握-GCD的其他常用函数[1086:78065] ----2-----<NSThread: 0x7fa8ba6bd030>{number = 3, name = (null)}
+2016-07-07 12:16:26.757 09-掌握-GCD的其他常用函数[1086:78065] ----barrier-----<NSThread: 0x7fa8ba6bd030>{number = 3, name = (null)}
+2016-07-07 12:16:26.757 09-掌握-GCD的其他常用函数[1086:78065] ----3-----<NSThread: 0x7fa8ba6bd030>{number = 3, name = (null)}
+2016-07-07 12:16:26.757 09-掌握-GCD的其他常用函数[1086:78056] ----4-----<NSThread: 0x7fa8ba708580>{number = 2, name = (null)}
+```
+
 ##各种队列的执行效果
 ![](屏幕快照 2016-07-06 20.17.22.png)
