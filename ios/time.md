@@ -47,7 +47,3 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), 
 [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(hideHUD) userInfo:nil repeats:NO];
 // repeats如果为YES，意味着每隔1.5s都会调用一次self的hidHUD方法
 ```
-
-
-![](images/Snip20150602_110.png)
-![](images/Snip20150602_110.png)
