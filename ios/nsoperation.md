@@ -198,12 +198,56 @@ log 打印
     NSLog(@"%@",[NSThread currentThread]);
 }
 
-
 log 打印
 掌握-NSOperationQueue[1680:294419] ---------- print,hello
 掌握-NSOperationQueue[1680:294419] <NSThread: 0x7fd37942f640>{number = 2, name = (null)}
 掌握-NSOperationQueue[1680:294423] 完了
 ```
 
+##操作依赖
+- NSOperation之间可以设置依赖来保证执行顺序
+- 比如一定要让操作A执行完后，才能执行操作B，可以这么写[operationB addDependency:operationA]; // 操作B依赖于操作A
+- 可以在不同queue的NSOperation之间创建依赖关系
+
+```objc
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    NSBlockOperation *op1 = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"download1----%@", [NSThread  currentThread]);
+    }];
+    NSBlockOperation *op2 = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"download2----%@", [NSThread  currentThread]);
+    }];
+    NSBlockOperation *op3 = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"download3----%@", [NSThread  currentThread]);
+    }];
+    NSBlockOperation *op4 = [NSBlockOperation blockOperationWithBlock:^{
+        for (NSInteger i = 0; i<10; i++) {
+            NSLog(@"download4----%@", [NSThread  currentThread]);
+        }
+    }];
+    NSBlockOperation *op5 = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"download5----%@", [NSThread  currentThread]);
+    }];
+    op5.completionBlock = ^{
+        NSLog(@"op5执行完毕---%@", [NSThread currentThread]);
+    };
+    
+    // 设置依赖
+    [op3 addDependency:op1];
+    [op3 addDependency:op2];
+    [op3 addDependency:op4];
+    
+    [queue addOperation:op1];
+    [queue addOperation:op2];
+    [queue addOperation:op3];
+    [queue addOperation:op4];
+    [queue addOperation:op5];
+}
+
+log 打印
+```
 
 
