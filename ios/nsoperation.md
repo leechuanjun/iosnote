@@ -16,8 +16,6 @@
 ```objc
 - (void)test2
 {
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
     NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(print:) object:@"hello"];
     
     //不会开新线程
@@ -29,3 +27,29 @@ log
 -NSOperationQueue[1600:268010] ----------print,hello
 -NSOperationQueue[1600:268010] <NSThread: 0x7fb380f00ac0>{number = 1, name = main}
 ```
+
+- 加入队列会开启新线程
+
+```objc
+- (void)test2
+{
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(print:) object:@"hello"];
+    
+    [queue addOperation:op];
+}
+
+- (void)print:(NSString *)argv
+{
+    NSLog(@"----------print,%@",argv);
+    NSLog(@"%@",[NSThread currentThread]);
+}
+
+log 打印
+掌握-NSOperationQueue[1614:271415] ----------print,hello
+掌握-NSOperationQueue[1614:271415] <NSThread: 0x7fc610e78a90>{number = 2, name = (null)}
+```
+
+##NSBlockOperation
