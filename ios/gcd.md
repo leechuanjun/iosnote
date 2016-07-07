@@ -50,6 +50,10 @@ unsigned long flags); // 此参数暂时无用，用0即可
 
 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获得全局并发队列
 
+或者创建并发队列
+dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", DISPATCH_QUEUE_CONCURRENT);
+
+
 全局并发队列的优先级
 #define DISPATCH_QUEUE_PRIORITY_HIGH 2 // 高
 #define DISPATCH_QUEUE_PRIORITY_DEFAULT 0 // 默认（中）
@@ -58,3 +62,17 @@ dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAU
 ```
 
 ##串行队列
+- 串行队列创建有2种方法
+###方法一
+```objc
+dispatch_queue_create(const char *label, dispatch_queue_attr_t attr); 
+const char *label // 队列名称 
+dispatch_queue_attr_t attr// 队列属性,当填写NULL的时候，就是填写DISPATCH_QUEUE_SERIAL（串行的意思）
+```
+
+```objc
+dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", DISPATCH_QUEUE_SERIAL);
+或者 
+dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", NULL);
+```
+
