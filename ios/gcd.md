@@ -295,3 +295,6 @@ dispatch_group_notify(group, dispatch_get_main_queue(), ^{
     // 等前面的异步操作都执行完毕后，回到主线程...
 });
 ```
+
+##各种队列的执行效果
+![](屏幕快照 2016-07-06 20.17.22.png)
