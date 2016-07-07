@@ -38,3 +38,5 @@ dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
  * 并发和串行主要影响：任务的执行方式
    * 并发：多个任务并发（同时）执行
    * 串行：一个任务执行完毕后，再执行下一个任务
+
+
