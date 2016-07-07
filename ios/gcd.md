@@ -253,3 +253,14 @@ asyncConcurrent--------end
 2016-07-06 19:57:35.556 07-GCD的基本使用[1520:136327] 2-----<NSThread: 0x7fd239707210>{number = 3, name = (null)}
 2016-07-06 19:57:35.556 07-GCD的基本使用[1520:136343] 3-----<NSThread: 0x7fd2395031d0>{number = 4, name = (null)}
 ```
+
+##线程间通信示例
+```objc
+dispatch_async(
+dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // 执行耗时的异步操作...
+      dispatch_async(dispatch_get_main_queue(), ^{
+        // 回到主线程，执行UI刷新操作
+        });
+});
+```
