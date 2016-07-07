@@ -178,3 +178,28 @@ log 打印
 -GCD的基本使用[1443:127744] syncSerial--------end
 syncSerialsyncSerial
 ```
+
+- ####异步函数 + 串行队列：会开启新的线程，但是任务是串行的，执行完一个任务，再执行下一个任务
+```objc
+/**
+ * 异步函数 + 串行队列：会开启新的线程，但是任务是串行的，执行完一个任务，再执行下一个任务
+ */
+- (void)asyncSerial
+{
+    // 1.创建串行队列
+    dispatch_queue_t queue = dispatch_queue_create("com.520it.queue", DISPATCH_QUEUE_SERIAL);
+    
+    // 2.将任务加入队列
+    dispatch_async(queue, ^{
+        NSLog(@"1-----%@", [NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"2-----%@", [NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"3-----%@", [NSThread currentThread]);
+    });
+    
+     NSLog(@"asyncSerial--------end");
+}
+```
