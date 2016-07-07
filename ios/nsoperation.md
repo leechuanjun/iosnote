@@ -104,9 +104,17 @@ log 打印
 - (void)addOperationWithBlock:(void (^)(void))block;
 ```
 
-##
+##最大并发数
 
 - 当队列最大并发数为1时，表示串行
+
+```objc
+//什么是并发数:比如同时开3个线程执行3个任务，并发数就是3
+//最大并发数的相关方法
+- (NSInteger)maxConcurrentOperationCount;
+- (void)setMaxConcurrentOperationCount:(NSInteger)cnt;
+```
+
 ```objc
 - (void)test1
 {
@@ -139,8 +147,17 @@ log 打印
         
     }];
     
-    log 打印
-
+ log 打印
+-NSOperationQueue[1666:287432] ----------NSBlockOperation1
+-NSOperationQueue[1666:287432] <NSThread: 0x7fba515134b0>{number = 2, name = (null)}
+-NSOperationQueue[1666:287432] ----------NSBlockOperation2
+-NSOperationQueue[1666:287432] <NSThread: 0x7fba515134b0>{number = 2, name = (null)}
+-NSOperationQueue[1666:287432] ----------NSBlockOperation3
+-NSOperationQueue[1666:287432] <NSThread: 0x7fba515134b0>{number = 2, name = (null)}
+-NSOperationQueue[1666:287432] ----------NSBlockOperation4
+-NSOperationQueue[1666:287432] <NSThread: 0x7fba515134b0>{number = 2, name = (null)}
 }
 ```
+
+
 
