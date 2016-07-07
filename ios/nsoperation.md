@@ -138,6 +138,8 @@ log 打印
         NSLog(@"%@",[NSThread currentThread]);
         
     }];
+    
+    log 打印
 
 }
 ```
