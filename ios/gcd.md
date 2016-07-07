@@ -39,4 +39,22 @@ dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
    * 并发：多个任务并发（同时）执行
    * 串行：一个任务执行完毕后，再执行下一个任务
 
+##并发队列
+###GCD默认已经提供了全局的并发队列，供整个应用使用，不需要手动创建
+### 使用dispatch_get_global_queue函数获得全局的并发队列
 
+```
+dispatch_queue_t dispatch_get_global_queue(
+dispatch_queue_priority_t priority, // 队列的优先级
+unsigned long flags); // 此参数暂时无用，用0即可
+
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获得全局并发队列
+
+全局并发队列的优先级
+#define DISPATCH_QUEUE_PRIORITY_HIGH 2 // 高
+#define DISPATCH_QUEUE_PRIORITY_DEFAULT 0 // 默认（中）
+#define DISPATCH_QUEUE_PRIORITY_LOW (-2) // 低
+#define DISPATCH_QUEUE_PRIORITY_BACKGROUND INT16_MIN // 后台
+```
+
+##串行队列
