@@ -15,3 +15,20 @@
 12.XYPieChart 饼状图
 13.UUChartView 折线图
 14.IQKeyboardManager 输入框在键盘弹出的时候处理显示位置
+
+AFNetworking： 网络请求
+AFOnoSerializer： 序列化XML和HTML
+DateTools： 时间计算
+DTCoreText： 渲染HTML
+GRMustache： html模版引擎
+GPUImage： 图像处理
+MBProgressHUD： 显示提示或加载进度
+MJRefresh： 刷新控件
+Ono： 解析XML
+ReactiveCocoa： 函数式编程和响应式编程框架
+RESideMenu： 侧拉栏
+SDWebImage： 加载网络图片和缓存图片
+SSKeychain： 账号密码的存取
+TBXML： 解析XML
+TOWebViewController： 内置浏览器
+TTTAttributedLabel： 支持富文本显示的label
