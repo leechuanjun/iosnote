@@ -36,3 +36,5 @@ TTTAttributedLabel： 支持富文本显示的label
 
 时间处理类
 
+https:\/\/github.com\/kevinlawler\/NSDate-TimeAgo
+
