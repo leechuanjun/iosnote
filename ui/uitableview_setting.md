@@ -1,9 +1,10 @@
 # UITableView setting
 
+##UITableViewCellAccessory
+![](../assets/tableviewtype.png)
 
+## UITableViewCell的contentView  
 
-
-![](../images/tableviewtype.png)
 
 - 设置选中后的颜色
 
