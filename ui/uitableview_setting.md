@@ -3,7 +3,7 @@
 ##UITableViewCellAccessory
 ![](../assets/tableviewtype.png)
 
-## UITableViewCell的contentView  
+## UITableViewCell的contentView   
 ![](../assets/contentView.png)
 
 
