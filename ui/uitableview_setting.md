@@ -4,6 +4,7 @@
 ![](../assets/tableviewtype.png)
 
 ## UITableViewCell的contentView  
+![](../assets/contentView.png)
 
 
 - 设置选中后的颜色
