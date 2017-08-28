@@ -214,3 +214,5 @@ typedef void(^ZJCAddVeiwBlock)(ZJCChatData * data);
 ```objc
 self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.809 green:0.491 blue:1.000 alpha:1.000];
 ```
+
+
