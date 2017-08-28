@@ -1,4 +1,5 @@
 # UINavigationController
+
 ###1、UINavigationController的简单使用
 - UINavigationController的使用步骤
  - 初始化UINavigationController
@@ -6,8 +7,6 @@
  - 根据具体情况，通过push方法添加对应个数的子控制器
 
 ## * UINavigationController以栈的形式保存子控制器</font>
-
-</br>
 
 ```objc
 
@@ -25,7 +24,6 @@
 //回到根控制器（栈底控制器）
 - (NSArray *)popToRootViewControllerAnimated:(BOOL)animated;
 ```
-</br>
 
 ##控制器的数据传递
  - 控制器之间的数据传递主要有2种情况:顺传和逆传顺传
