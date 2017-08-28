@@ -5,7 +5,7 @@
  - 设置UIWindow的rootViewController为UINavigationController
  - 根据具体情况，通过push方法添加对应个数的子控制器
 
-## <font color=red size=5> * UINavigationController以栈的形式保存子控制器</font>
+## * UINavigationController以栈的形式保存子控制器</font>
 
 </br>
 
