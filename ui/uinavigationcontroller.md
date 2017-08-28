@@ -115,7 +115,7 @@ typedef void(^ZJCAddVeiwBlock)(ZJCChatData * data);
 ```
 
 ##修改导航栏的内容
-## <font color=red size=5> * 导航栏的内容由栈顶控制器的navigationItem属性决定</font>
+## * 导航栏的内容由栈顶控制器的navigationItem属性决定</font>
 
 ```objc
 //UINavigationItem有以下属性影响着导航栏的内容
