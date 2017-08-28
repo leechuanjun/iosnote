@@ -33,7 +33,7 @@
     * [定时器](ios/time.md)
     * [plist](ios/plist.md)
     * [Xib的加载](ios/xib.md)
-    * [代理模式](ios/dan_li_mo_shi.md)
+    * [代理模式](ios/dai_li_mo_shi.md)
     * [KVC\KVO\代理](ios/abc.md)
     * [图片拉伸](ios/sada.md)
     * [Notification](ios/notification.md)
