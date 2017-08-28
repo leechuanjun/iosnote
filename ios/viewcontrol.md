@@ -1,7 +1,7 @@
 # ViewControl
 
 
-
+特别注意：
 - 控制器的view是延迟加载的(就是懒加载)：用到时再加载
 
 - 可以用isViewLoaded方法判断一个UIViewController的view是否已经被加载
